@@ -1,0 +1,13 @@
+package com.gabrielsousa;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class GabrielsousaApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(GabrielsousaApplication.class, args);
+	}
+
+}

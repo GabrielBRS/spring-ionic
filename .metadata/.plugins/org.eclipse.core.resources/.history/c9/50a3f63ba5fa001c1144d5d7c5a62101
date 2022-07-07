@@ -1,0 +1,5 @@
+package com.gabrielsousa.dto;
+
+public class ClientDTO {
+
+}

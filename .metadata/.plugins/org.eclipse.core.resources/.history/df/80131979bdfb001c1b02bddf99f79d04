@@ -1,0 +1,61 @@
+package com.gabrielsousa.service;
+
+import java.util.Date;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gabrielsousa.domain.Request;
+import com.gabrielsousa.domain.enums.PaymentType;
+import com.gabrielsousa.repository.RequestRepository;
+import com.gabrielsousa.service.exception.ObjectNotFoundException;
+
+@Service
+public class RequestService {
+	
+	@Autowired
+	private RequestRepository requestRepository;
+	
+	@Autowired
+	private ClientService clientService;
+
+	public Request find(Integer id) {
+		Optional<Request> obj = requestRepository.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Request.class.getName()));
+	}
+	
+	public Request insert(Request obj) {
+		obj.setId(null);
+		obj.setInstant(new Date());
+		obj.setCliente(clientService.find(obj.getCliente().getId()));
+		obj.getPayment().setEstado(PaymentType.PENDENTE);
+		obj.getPayment().setPayment(obj);
+		if (obj.getPayment() instanceof PagamentoComBoleto) {
+			PagamentoComBoleto pagto = (PagamentoComBoleto) obj.getPagamento();
+			boletoService.preencherPagamentoComBoleto(pagto, obj.getInstante());
+		}
+		obj = repo.save(obj);
+		pagamentoRepository.save(obj.getPagamento());
+		for (ItemPedido ip : obj.getItens()) {
+			ip.setDesconto(0.0);
+			ip.setProduto(produtoService.find(ip.getProduto().getId()));
+			ip.setPreco(ip.getProduto().getPreco());
+			ip.setPedido(obj);
+		}
+		itemPedidoRepository.saveAll(obj.getItens());
+		emailService.sendOrderConfirmationEmail(obj);
+		return obj;
+	}
+	
+	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Cliente cliente =  clienteService.find(user.getId());
+		return repo.findByCliente(cliente, pageRequest);
+	}
+}

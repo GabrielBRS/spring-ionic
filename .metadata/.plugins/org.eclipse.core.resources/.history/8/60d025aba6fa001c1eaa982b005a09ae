@@ -1,0 +1,10 @@
+package com.gabrielsousa.service.validation;
+
+import javax.validation.ConstraintValidator;
+
+import com.gabrielsousa.dto.ClientDTO;
+import com.gabrielsousa.services.validation.ClientUpdate;
+
+public class ClientUpdateValidator implements ConstraintValidator<ClientUpdate, ClientDTO>{
+
+}

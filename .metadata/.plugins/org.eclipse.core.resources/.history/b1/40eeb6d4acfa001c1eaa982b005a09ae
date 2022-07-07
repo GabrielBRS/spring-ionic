@@ -1,0 +1,28 @@
+package com.gabrielsousa.service;
+
+import java.text.ParseException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gabrielsousa.domain.Client;
+import com.gabrielsousa.repository.ClientRepository;
+
+@Service
+public class DBService {
+	
+	@Autowired
+	private ClientRepository clientRepository;
+
+
+	public void instantiateTestDatabase() throws ParseException{
+		
+		Client cli1 = new Client(null,"Gabriel Barros","gabriel.brs.gsousa@gmail.com","04912788104", 1);
+		Client cli2 = new Client(null,"Matheus Barros","matheus@gmail.com","04912788184", 2);
+		Client cli3 = new Client(null,"Eduarda Barros","eduarda@gmail.com","04912555555", 1);
+		
+		clientRepository.save((cli1));
+		clientRepository.save((cli2));
+		clientRepository.save((cli3));
+	}
+}

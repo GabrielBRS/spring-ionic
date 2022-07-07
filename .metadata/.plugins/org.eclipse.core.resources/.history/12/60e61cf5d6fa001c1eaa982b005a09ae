@@ -1,0 +1,6 @@
+package com.gabrielsousa.domain;
+
+@Entity
+public class ItemRequest {
+
+}

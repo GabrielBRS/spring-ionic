@@ -1,0 +1,24 @@
+package com.gabrielsousa.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gabrielsousa.domain.Category;
+import com.gabrielsousa.repository.CategoryRepository;
+import com.gabrielsousa.service.validation.ObjectNotFoundException;
+
+@Service
+public class CategoryService {
+
+	@Autowired
+	CategoryRepository categoryRepository;
+
+	public Category find(Integer id) {
+		Optional<Category> obj = categoryRepository.findById(id);
+		return obj.orElseThrow(()-> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: "
+				+ Category.class.getName()));
+	}
+}

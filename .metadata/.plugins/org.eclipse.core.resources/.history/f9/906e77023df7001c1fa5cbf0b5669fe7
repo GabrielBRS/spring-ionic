@@ -1,0 +1,5 @@
+package com.gabrielsousa.service.validation;
+
+public class ClientInsertValidator {
+
+}

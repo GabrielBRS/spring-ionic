@@ -1,0 +1,15 @@
+package com.gabrielsousa.domain.enums;
+
+public enum ClientType {
+	
+	PESSOAFISICA(1,"Pessoa Física"),
+	PESSOAJURIDICA(2,"Pessoa Jurídica");
+	
+	private int cod;
+	private String descricao;
+	
+	private ClientType(int cod, String descricao) {
+		this.cod = cod;
+		this.descricao = descricao;
+	}
+}

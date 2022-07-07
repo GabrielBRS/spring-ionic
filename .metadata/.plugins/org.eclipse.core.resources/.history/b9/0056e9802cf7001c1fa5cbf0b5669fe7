@@ -1,0 +1,12 @@
+package com.gabrielsousa.domain;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Client {
+
+	
+	public Client() {
+		
+	}
+}
