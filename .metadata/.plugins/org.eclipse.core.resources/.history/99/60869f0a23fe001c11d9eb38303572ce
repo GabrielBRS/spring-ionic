@@ -4,7 +4,7 @@
 #spring.jpa.properties.hibernate.hbm2ddl.delimiter=;
 
 #Banco de dados na nuvem
-spring.datasource.url=${DATABASE_URL}
+#spring.datasource.url=${DATABASE_URL}
 
 #spring.datasource.url=${SPRING_DATASOURCE_URL}
 #spring.datasource.username=${SPRING_DATASOURCE_USERNAME}
