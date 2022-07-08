@@ -6,8 +6,8 @@
 #Banco de dados na nuvem
 #spring.datasource.url=${DATABASE_URL}
 
-spring.datasource.url=${SPRING_DATASOURCE_URL}
-##spring.jpa.database=${DATABASE}
+#spring.datasource.url=${SPRING_DATASOURCE_URL}
+#spring.jpa.database=${DATABASE}
 spring.datasource.username=${SPRING_DATASOURCE_USERNAME}
 spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}
 spring.datasource.driverClassName=${SPRING_DATASOURCE_DRIVER-CLASS-NAME}
