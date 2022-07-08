@@ -8,10 +8,10 @@
 
 spring.datasource.url=${SPRING_DATASOURCE_URL}
 ##spring.jpa.database=${DATABASE}
-#spring.datasource.username=${SPRING_DATASOURCE_USERNAME}
-#spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}
-#spring.datasource.driverClassName=${SPRING_DATASOURCE_DRIVER-CLASS-NAME}
-#spring.jpa.database-platform=${SPRING_JPA_DATABASE-PLATFORM}
+spring.datasource.username=${SPRING_DATASOURCE_USERNAME}
+spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}
+spring.datasource.driverClassName=${SPRING_DATASOURCE_DRIVER-CLASS-NAME}
+spring.jpa.database-platform=${SPRING_JPA_DATABASE-PLATFORM}
 #spring.datasource.testWhileIdle=true
 #spring.datasource.validationQuery=SELECT 1
 #spring.jpa.show-sql=true
