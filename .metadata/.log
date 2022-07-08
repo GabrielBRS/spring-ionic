@@ -4554,3 +4554,21 @@ Binding(CTRL+SHIFT+C,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-07-08 10:34:07.931
+!MESSAGE The artifact org.hibernate:hibernate-core:pom:6.1.0.Final has been relocated to org.hibernate.orm:hibernate-core:pom:6.1.0.Final
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-07-08 10:34:07.944
+!MESSAGE The artifact org.hibernate:hibernate-entitymanager:pom:6.0.0.Alpha7 has been relocated to org.hibernate.orm:hibernate-entitymanager:pom:6.0.0.Alpha7
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-07-08 10:34:07.971
+!MESSAGE The artifact org.hibernate:hibernate-validator:jar:6.0.13.Final has been relocated to org.hibernate.validator:hibernate-validator:jar:6.0.13.Final
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-07-08 10:34:15.400
+!MESSAGE The artifact org.hibernate:hibernate-core:pom:6.1.0.Final has been relocated to org.hibernate.orm:hibernate-core:pom:6.1.0.Final
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-07-08 10:34:15.412
+!MESSAGE The artifact org.hibernate:hibernate-entitymanager:pom:6.0.0.Alpha7 has been relocated to org.hibernate.orm:hibernate-entitymanager:pom:6.0.0.Alpha7
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-07-08 10:34:15.434
+!MESSAGE The artifact org.hibernate:hibernate-validator:jar:6.0.13.Final has been relocated to org.hibernate.validator:hibernate-validator:jar:6.0.13.Final
