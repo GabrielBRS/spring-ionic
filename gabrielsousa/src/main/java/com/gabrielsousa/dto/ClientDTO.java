@@ -8,7 +8,6 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.gabrielsousa.domain.Client;
-import com.gabrielsousa.domain.enums.ClientType;
 import com.gabrielsousa.service.validation.ClientUpdate;
 
 @ClientUpdate
@@ -24,8 +23,6 @@ public class ClientDTO implements Serializable {
 	@NotEmpty(message = "Preenchimento obrigatório")
 	@Email(message = "Email inválido")
 	private String email;
-	
-	private ClientType clientType;
 
 	public ClientDTO() {
 
@@ -36,7 +33,6 @@ public class ClientDTO implements Serializable {
 		this.id = obj.getId();
 		this.name = obj.getName();
 		this.email = obj.getEmail();
-		this.clientType = obj.getClientType();
 	}
 
 	public Integer getId() {
@@ -61,21 +57,5 @@ public class ClientDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-//  Retorna o nome do enum
-	
-//	public ClientType getClientType() {
-//		return clientType;
-//	}
-	
-//  Retorna o código do Enum
-	public Integer getClientType() {
-		Integer returnCodEnum = clientType.getCod();
-		return returnCodEnum;
-	}
-
-	public void setClientType(ClientType clientType) {
-		this.clientType = clientType;
 	}
 }

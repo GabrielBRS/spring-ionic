@@ -15,6 +15,9 @@ public interface CityRepository extends JpaRepository<City, Integer> {
 	@Transactional(readOnly=true)
 //  TODO-FAZER O MÉTODO FindCities funcionar
 //	@Query("SELECT obj FROM City obj WHERE obj.state.id = :stateId ORDER BY obj.name")
-	public List<City> state(@Param("stateId") Integer state_id);
+//	public List<City> state(@Param("stateId") Integer state_id);
+
+//	Query model findDistinctByNameContainingAndCategoriesIn
+	public List<City> findSelectByState(@Param("stateId") Integer state_id);
 	
 }

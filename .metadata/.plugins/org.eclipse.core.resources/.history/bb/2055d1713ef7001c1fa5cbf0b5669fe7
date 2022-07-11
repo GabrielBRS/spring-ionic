@@ -1,8 +1,0 @@
-package com.gabrielsousa.dto;
-
-import com.gabrielsousa.service.validation.ClientInsert;
-
-@ClientInsert
-public class ClientNewDTO {
-
-}

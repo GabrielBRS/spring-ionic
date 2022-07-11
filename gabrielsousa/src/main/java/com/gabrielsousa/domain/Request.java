@@ -3,7 +3,7 @@ package com.gabrielsousa.domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Objects;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,13 +17,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ibm.icu.text.NumberFormat;
+import com.ibm.icu.text.SimpleDateFormat;
 
 @Entity
 public class Request implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
@@ -54,8 +56,6 @@ public class Request implements Serializable {
 		this.client = client;
 		this.adressDelivery = adressDelivery;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -105,9 +105,21 @@ public class Request implements Serializable {
 		this.itens = itens;
 	}
 
+	
+	public double getValorTotal() {
+		double soma = 0.0;
+		for (ItemRequest ip : itens) {
+			soma = soma + ip.getSubTotal();
+		}
+		return soma;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
 	@Override
@@ -119,13 +131,34 @@ public class Request implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Request other = (Request) obj;
-		return Objects.equals(id, other.id);
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Request [id=" + id + ", instant=" + instant + ", payment=" + payment + ", client=" + client
-				+ ", adressDelivery=" + adressDelivery + ", itens=" + itens + "]";
-	}
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		StringBuilder builder = new StringBuilder();
+		builder.append("Pedido número: ");
+		builder.append(getId());
+		builder.append(", Instante: ");
+		builder.append(sdf.format(getInstant()));
+		builder.append(", Cliente: ");
+		builder.append(getClient().getName());
+		builder.append(", Situação do pagamento: ");
+		builder.append(getPayment().getPaymentType().getDescription());
+		builder.append("\nDetalhes:\n");
+		for(ItemRequest ip : getItens()) {
+			builder.append(ip.toString());
+		}
+		builder.append("Valor total: ");
+		builder.append(nf.format(getValorTotal()));
+		return builder.toString();
+	}	
 	
 }

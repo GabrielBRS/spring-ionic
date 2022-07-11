@@ -1,6 +1,0 @@
-package com.gabrielsousa.dto;
-
-@ClientInsert
-public class ClientNewDTO {
-
-}

@@ -1,12 +1,13 @@
 package com.gabrielsousa.domain;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.Locale;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ibm.icu.text.NumberFormat;
 
 @Entity
 public class ItemRequest implements Serializable{
@@ -32,7 +33,28 @@ public class ItemRequest implements Serializable{
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
-
+	
+	public double getSubTotal() {
+		return (preco - desconto) * quantidade;
+	}
+	
+	@JsonIgnore
+	public Request getRequest() {
+		return id.getRequest();
+	}
+	
+	public void setRequest(Request request) {
+		id.setRequest(request);
+	}
+	
+	public Product getProduct() {
+		return id.getProduct();
+	}
+	
+	public void setProduct(Product product) {
+		id.setProduct(product);
+	}
+	
 	public ItemRequestPK getId() {
 		return id;
 	}
@@ -65,26 +87,12 @@ public class ItemRequest implements Serializable{
 		this.preco = preco;
 	}
 	
-	@JsonIgnore
-	public Request getRequest() {
-		return id.getRequest();
-	}
-	
-	public void setRequest(Request request) {
-		id.setRequest(request);
-	}
-	
-	public Product getProduct() {
-		return id.getProduct();
-	}
-	
-	public void setProduct(Product product) {
-		id.setProduct(product);
-	}
-	
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
 	@Override
@@ -96,6 +104,27 @@ public class ItemRequest implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		ItemRequest other = (ItemRequest) obj;
-		return Objects.equals(id, other.id);
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
+
+	@Override
+	public String toString() {
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduct().getName());
+		builder.append(", Qte: ");
+		builder.append(getQuantidade());
+		builder.append(", Preço unitário: ");
+		builder.append(getPreco());
+		builder.append(", Subtotal: ");
+		builder.append(nf.format(getSubTotal()));
+		builder.append("\n");
+		return builder.toString();
+	}
+	
 }

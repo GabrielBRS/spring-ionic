@@ -1,7 +1,6 @@
 package com.gabrielsousa.domain;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
@@ -41,7 +40,11 @@ public class ItemRequestPK implements Serializable {
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(product, request);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((request == null) ? 0 : request.hashCode());
+		result = prime * result + ((product == null) ? 0 : product.hashCode());
+		return result;
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -52,6 +55,16 @@ public class ItemRequestPK implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ItemRequestPK other = (ItemRequestPK) obj;
-		return Objects.equals(product, other.product) && Objects.equals(request, other.request);
+		if (request == null) {
+			if (other.request != null)
+				return false;
+		} else if (!request.equals(other.request))
+			return false;
+		if (product == null) {
+			if (other.product != null)
+				return false;
+		} else if (!product.equals(other.product))
+			return false;
+		return true;
 	}
 }

@@ -46,7 +46,7 @@
 		<item key="Objects.equals &amp; Objects.hash" value="true"/>
 		<item key="LimitElements" value="false"/>
 		<item key="IgnoreDefault" value="true"/>
-		<item key="StringStyle" value="0"/>
+		<item key="StringStyle" value="1"/>
 		<item key="LimitValue" value="10"/>
 		<item key="SkipNull" value="false"/>
 		<item key="ToStringTemplateSelected" value="0"/>

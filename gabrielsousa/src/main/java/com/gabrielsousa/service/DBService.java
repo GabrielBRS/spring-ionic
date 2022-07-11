@@ -206,7 +206,7 @@ public class DBService {
 		Client cli2 = new Client(null,"Matheus Barros","matheus@gmail.com","04912788184", ClientType.PESSOAJURIDICA);
 		cli2.getTelefones().addAll(Arrays.asList("93883321", "34252625"));
 		
-		Client cli3 = new Client(null,"Eduarda Barros","eduarda@gmail.com","04912555555", ClientType.PESSOAFISICA);
+//		Client cli3 = new Client(null,"Eduarda Barros","eduarda@gmail.com","04912555555", ClientType.PESSOAFISICA);
 		
 		Adress e1 = new Adress(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
 		Adress e2 = new Adress(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
@@ -214,9 +214,10 @@ public class DBService {
 		
 		cli1.getAdress().addAll(Arrays.asList(e1, e2));
 		cli2.getAdress().addAll(Arrays.asList(e3));
-		cli2.getAdress().addAll(Arrays.asList(e2,e3));
+//		cli3.getAdress().addAll(Arrays.asList(e2,e3));
 		
-		clientRepository.saveAll(Arrays.asList(cli1,cli2,cli3));
+//		clientRepository.saveAll(Arrays.asList(cli1,cli2,cli3));
+		clientRepository.saveAll(Arrays.asList(cli1,cli2));
 		adressRepository.saveAll(Arrays.asList(e1, e2, e3));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");

@@ -16,6 +16,6 @@ public class CityService {
 	
 //  TODO-FAZER O MÉTODO FindCities funcionar
 	public List<City> findByState(Integer stateId){
-		return cityRepository.state(stateId);
+		return cityRepository.findSelectByState(stateId);
 	}
 }

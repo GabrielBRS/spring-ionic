@@ -53,25 +53,6 @@ public class ClientNewDTO implements Serializable {
 		
 	}
 
-	public ClientNewDTO(String name, String email, String cpfOuCnpj, Integer type, String logradouro, String numero,
-			String complemento, String bairro, String cep, String telefone1, String telefone2, String telefone3,
-			Integer cityId) {
-		super();
-		this.name = name;
-		this.email = email;
-		this.cpfOuCnpj = cpfOuCnpj;
-		this.type = type;
-		this.logradouro = logradouro;
-		this.numero = numero;
-		this.complemento = complemento;
-		this.bairro = bairro;
-		this.cep = cep;
-		this.telefone1 = telefone1;
-		this.telefone2 = telefone2;
-		this.telefone3 = telefone3;
-		this.cityId = cityId;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -175,13 +156,4 @@ public class ClientNewDTO implements Serializable {
 	public void setCityId(Integer cityId) {
 		this.cityId = cityId;
 	}
-
-	@Override
-	public String toString() {
-		return "ClientNewDTO [name=" + name + ", email=" + email + ", cpfOuCnpj=" + cpfOuCnpj + ", type=" + type
-				+ ", logradouro=" + logradouro + ", numero=" + numero + ", complemento=" + complemento + ", bairro="
-				+ bairro + ", cep=" + cep + ", telefone1=" + telefone1 + ", telefone2=" + telefone2 + ", telefone3="
-				+ telefone3 + ", cityId=" + cityId + "]";
-	}
-	
 }

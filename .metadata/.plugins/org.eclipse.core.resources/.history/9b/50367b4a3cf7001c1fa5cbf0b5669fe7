@@ -1,5 +1,0 @@
-package com.gabrielsousa.service.validation;
-
-public interface ClientInsert {
-
-}

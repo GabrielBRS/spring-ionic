@@ -1,0 +1,11 @@
+package com.gabrielsousa.service;
+
+import com.gabrielsousa.domain.Request;
+
+public abstract class AbstractEmailService {
+
+	@Override
+	void sendOrderConfirmationEmail(Request obj) {
+		
+	}
+}

@@ -1,7 +1,6 @@
 package com.gabrielsousa.domain;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -52,6 +51,7 @@ public abstract class Payment implements Serializable {
 
 	public PaymentType getPaymentType() {
 		return PaymentType.toEnum(paymentType);
+//		return paymentType;
 	}
 
 	public void setPaymentType(PaymentType paymentType) {
@@ -83,6 +83,11 @@ public abstract class Payment implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Payment other = (Payment) obj;
-		return Objects.equals(id, other.id);
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 }
