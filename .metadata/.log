@@ -7290,3 +7290,45 @@ java.net.URISyntaxException: Illegal character in path at index 16: file:/D:/Pro
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:48:10.658
 !MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.GJhHocUg => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:54:09.623
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:54:09.623
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@2f46ed64[org.springframework.tooling.boot.ls:1.32.0.202203131529(id=569)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:54:09.623
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:54:11.169
+!MESSAGE Boot LS startup time from start to initialized: 1544ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:54:11.214
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.bJpUtVoUisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:54:11.214
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:54:11.214
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:54:11.214
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:54:11.214
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:54:11.214
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.bJpUtVoU => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:54:11.226
+!MESSAGE classpath=207 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:54:11.230
+!MESSAGE buffering callback sts4.classpath.bJpUtVoU gabrielsousa false 207
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:54:11.230
+!MESSAGE executing callback sts4.classpath.bJpUtVoU 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-13 07:54:11.487
+!MESSAGE executing callback sts4.classpath.bJpUtVoU SUCCESS [done]
