@@ -1,0 +1,5 @@
+package com.gabrielsousa.security;
+
+public class AuthorizationFilter {
+
+}

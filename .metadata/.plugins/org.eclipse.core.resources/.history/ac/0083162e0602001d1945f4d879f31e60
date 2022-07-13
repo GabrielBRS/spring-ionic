@@ -1,0 +1,84 @@
+package com.gabrielsousa.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfig {
+
+//	@Autowired
+//	private Environment env;
+
+	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**", "/products", "/categories" };
+
+//	    @Bean
+//	    public WebSecurityCustomizer webSecurityCustomizer() {
+//	        return (web) -> web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");
+//	    }
+
+	@Bean
+//	@Order(1)
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http
+			// you probably want a request matcher since you are using @Order
+			.authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
+//			.apply(customDsl())
+			;
+		return http.build();
+	}
+
+	public class MyCustomDsl extends AbstractHttpConfigurer<MyCustomDsl, HttpSecurity> {
+		@Override
+		public void configure(HttpSecurity http) throws Exception {
+			AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
+			http.addFilter(new TokenAuthFilter(authenticationManager));
+		}
+
+		public static MyCustomDsl customDsl() {
+			return new MyCustomDsl();
+		}
+	}
+	
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+		return source;
+	}
+
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//		http.cors().and().csrf().disable();
+//		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll().anyRequest().authenticated();
+//		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//	}
+
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//
+//		if (Arrays.asList(env.getActiveProfiles()).contains("dev")||Arrays.asList(env.getActiveProfiles()).contains("test")) {
+//			http.headers().frameOptions().disable();
+//		}
+//
+//		http.cors().and().csrf().disable();
+//		http.authorizeRequests().antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
+//				.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll().antMatchers(PUBLIC_MATCHERS).permitAll()
+//				.anyRequest().authenticated();
+////		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+////		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
+//		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//	}
+//	
+
+}

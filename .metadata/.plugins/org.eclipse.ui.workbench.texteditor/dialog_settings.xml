@@ -6,14 +6,17 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="nome"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="json"/>
+			<item value="pedido"/>
 			<item value="name"/>
 			<item value="nome"/>
 			<item value="getCategorias"/>
 			<item value="Produto"/>
 		</list>
 		<list key="replacehistory">
+			<item value="request"/>
 			<item value="nome"/>
 			<item value="getCategories"/>
 			<item value="Product"/>

@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.gabrielsousa.domain.Adress;
@@ -33,6 +34,9 @@ import com.gabrielsousa.repository.StateRepository;
 
 @Service
 public class DBService {
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
@@ -200,10 +204,10 @@ public class DBService {
 		stateRepository.saveAll(Arrays.asList(est1, est2));
 		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
-		Client cli1 = new Client(null,"Gabriel Barros","gabriel.brs.gsousa@gmail.com","04912788104", ClientType.PESSOAFISICA);
+		Client cli1 = new Client(null,"Gabriel Barros","gabriel.brs.gsousa@gmail.com","04912788104", ClientType.PESSOAFISICA, passwordEncoder.encode("gabrielbrs"));
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 		
-		Client cli2 = new Client(null,"Matheus Barros","matheus@gmail.com","04912788184", ClientType.PESSOAJURIDICA);
+		Client cli2 = new Client(null,"Matheus Barros","matheus@gmail.com","04912788184", ClientType.PESSOAJURIDICA,passwordEncoder.encode("matheusbrs"));
 		cli2.getTelefones().addAll(Arrays.asList("93883321", "34252625"));
 		
 //		Client cli3 = new Client(null,"Eduarda Barros","eduarda@gmail.com","04912555555", ClientType.PESSOAFISICA);

@@ -9,10 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.gabrielsousa.domain.Adress;
+import com.gabrielsousa.domain.City;
 import com.gabrielsousa.domain.Client;
+import com.gabrielsousa.domain.enums.ClientType;
 import com.gabrielsousa.dto.ClientDTO;
+import com.gabrielsousa.dto.ClientNewDTO;
+import com.gabrielsousa.repository.AdressRepository;
 import com.gabrielsousa.repository.ClientRepository;
 import com.gabrielsousa.service.exception.ObjectNotFoundException;
 
@@ -21,6 +27,12 @@ public class ClientService {
 
 	@Autowired
 	private ClientRepository clientRepository;
+	
+	@Autowired
+	private AdressRepository adressRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	public Client find(Integer id) {
 		Optional<Client> obj = clientRepository.findById(id); 
@@ -42,7 +54,7 @@ public class ClientService {
 	public Client insert(Client obj) {
 		obj.setId(null);
 		clientRepository.save(obj);
-//		adressRepository.saveAll(obj.getEnderecos());
+		adressRepository.saveAll(obj.getAdress());
 		return obj;
 	}
 	
@@ -63,25 +75,23 @@ public class ClientService {
 	}
 	
 	public Client fromDTO(ClientDTO objDto) {
-//		throw new UnsupportedOperationException();
-		return new Client(objDto.getId(), objDto.getName(), objDto.getEmail(), null, null);
+		return new Client(objDto.getId(), objDto.getName(), objDto.getEmail(), null, null, null);
 	}
 	
-//	public Client fromDTO(ClientNewDTO objDto) {
-////		throw new UnsupportedOperationException();
-//		Client cli = new Client(null, objDto.getName(), objDto.getEmail(), objDto.getCpfOuCnpj(), ClientType.toEnum(objDto.getType()));
-//		City cid = new City(objDto.getCityId(),null,null);
-//		Adress adr = new Adress(null, objDto.getLogradouro(),objDto.getNumero(),objDto.getComplemento(),objDto.getBairro(),objDto.getCep(),cli,cid);
-//		cli.getEnderecos().add(adr);
-//		cli.getTelefones().add(objDto.getTelephone1());
-//		if(objDto.getTelephone2()!=null) {
-//			cli.getTelefones().add(objDto.getTelephone2());
-//		}
-//		if(objDto.getTelephone3()!=null) {
-//			cli.getTelefones().add(objDto.getTelephone3());
-//		}
-//		return cli;
-//	}
+	public Client fromDTO(ClientNewDTO objDto) {
+		Client cli = new Client(null, objDto.getName(), objDto.getEmail(), objDto.getCpfOuCnpj(), ClientType.toEnum(objDto.getType()), passwordEncoder.encode(objDto.getPassword()));
+		City cid = new City(objDto.getCityId(),null,null);
+		Adress adr = new Adress(null, objDto.getLogradouro(),objDto.getNumero(),objDto.getComplemento(),objDto.getBairro(),objDto.getCep(),cli,cid);
+		cli.getAdress().add(adr);
+		cli.getTelefones().add(objDto.getTelefone1());
+		if(objDto.getTelefone2()!=null) {
+			cli.getTelefones().add(objDto.getTelefone2());
+		}
+		if(objDto.getTelefone3()!=null) {
+			cli.getTelefones().add(objDto.getTelefone3());
+		}
+		return cli;
+	}
 	
 	private void updateData(Client newObj, Client obj) {
 		newObj.setName(obj.getName());
