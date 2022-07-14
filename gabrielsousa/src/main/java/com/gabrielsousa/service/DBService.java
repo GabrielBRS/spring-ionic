@@ -21,6 +21,7 @@ import com.gabrielsousa.domain.Request;
 import com.gabrielsousa.domain.State;
 import com.gabrielsousa.domain.enums.ClientType;
 import com.gabrielsousa.domain.enums.PaymentType;
+import com.gabrielsousa.domain.enums.Perfil;
 import com.gabrielsousa.repository.AdressRepository;
 import com.gabrielsousa.repository.CategoryRepository;
 import com.gabrielsousa.repository.CityRepository;
@@ -206,9 +207,11 @@ public class DBService {
 		
 		Client cli1 = new Client(null,"Gabriel Barros","gabriel.brs.gsousa@gmail.com","04912788104", ClientType.PESSOAFISICA, passwordEncoder.encode("gabrielbrs"));
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+		cli1.addPerfil(Perfil.ADMIN);
 		
 		Client cli2 = new Client(null,"Matheus Barros","matheus@gmail.com","04912788184", ClientType.PESSOAJURIDICA,passwordEncoder.encode("matheusbrs"));
 		cli2.getTelefones().addAll(Arrays.asList("93883321", "34252625"));
+//		cli2.addPerfil(Perfil.ADMIN);
 		
 //		Client cli3 = new Client(null,"Eduarda Barros","eduarda@gmail.com","04912555555", ClientType.PESSOAFISICA);
 		

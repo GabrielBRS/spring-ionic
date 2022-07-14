@@ -1,0 +1,5 @@
+package com.gabrielsousa.service.exception;
+
+public class AuthorizationException {
+
+}

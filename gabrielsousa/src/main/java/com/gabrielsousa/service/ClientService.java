@@ -16,10 +16,13 @@ import com.gabrielsousa.domain.Adress;
 import com.gabrielsousa.domain.City;
 import com.gabrielsousa.domain.Client;
 import com.gabrielsousa.domain.enums.ClientType;
+import com.gabrielsousa.domain.enums.Perfil;
 import com.gabrielsousa.dto.ClientDTO;
 import com.gabrielsousa.dto.ClientNewDTO;
 import com.gabrielsousa.repository.AdressRepository;
 import com.gabrielsousa.repository.ClientRepository;
+import com.gabrielsousa.security.UserSS;
+import com.gabrielsousa.service.exception.AuthorizationException;
 import com.gabrielsousa.service.exception.ObjectNotFoundException;
 
 @Service
@@ -34,10 +37,29 @@ public class ClientService {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	public Client find(Integer id) {
+	public Client find(Integer id){
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Optional<Client> obj = clientRepository.findById(id); 
 		return obj.orElseThrow(() -> new ObjectNotFoundException( 
 		 "Objeto não encontrado! Id: " + id + ", Tipo: " + Client.class.getName())); 
+	}
+	
+	public Client findByEmail(String email){
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+	
+		Client obj = clientRepository.findByEmail(email);
+		if (obj == null) {
+			throw new ObjectNotFoundException(
+					"Objeto não encontrado! Id: " + user.getId() + ", Tipo: " + Client.class.getName());
+		}
+		return obj;
 	}
 	
 	public List<Client> findAll(){

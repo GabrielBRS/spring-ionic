@@ -1,0 +1,6 @@
+spring.profiles.active=${APP_PROFILE:dev}
+###
+#spring.profiles.active=prod
+
+default.sender=
+default.recipient=

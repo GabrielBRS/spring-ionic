@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +20,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gabrielsousa.domain.enums.ClientType;
+import com.gabrielsousa.domain.enums.Perfil;
 
 @Entity
 public class Client implements Serializable{
@@ -47,8 +50,13 @@ public class Client implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy="client")
 	private List<Request> request = new ArrayList<>();
+	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
 
 	public Client() {
+		addPerfil(Perfil.CLIENT);
 	}
 
 	public Client(Integer id, String name, String email, String cpfOuCnpj, ClientType clientType, String password) {
@@ -59,6 +67,7 @@ public class Client implements Serializable{
 		this.CpfOuCnpj = cpfOuCnpj;
 		this.clientType = (clientType==null)?null:clientType.getCod();
 		this.password = password;
+		addPerfil(Perfil.CLIENT);
 	}
 
 	public Integer getId() {
@@ -131,6 +140,18 @@ public class Client implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Set<Perfil> getPerfis() {	
+		return perfis.stream().map(x-> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
+
+	public void setPerfis(Set<Integer> perfis) {
+		this.perfis = perfis;
+	}
+	
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
 	}
 
 	@Override
